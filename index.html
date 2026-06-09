@@ -3,113 +3,517 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>a-real Immobilien</title>
+  <title>a-real Immobilien · Wien, Österreich</title>
+  <meta name="description" content="a-real Immobilien – Ihr Partner für Immobilien in Österreich. Neue Website in Kürze.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Lora:wght@400;500&display=swap" rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold:   #c9a96e;
+      --text:   #1a1a18;
+      --gray:   #6b6b68;
+      --light:  #f5f4f0;
+      --white:  #ffffff;
+      --border: #e2e0da;
+      --dark:   #0d1b2a;
+      --serif:  'Lora', Georgia, serif;
+      --sans:   'Inter', system-ui, sans-serif;
     }
 
+    html { scroll-behavior: smooth; }
     body {
-      font-family: 'Georgia', serif;
-      background-color: #0d1b2a;
-      color: #f0ece4;
-      min-height: 100vh;
+      font-family: var(--sans);
+      font-size: 15px;
+      color: var(--text);
+      background: var(--dark);
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; -webkit-tap-highlight-color: transparent; }
+
+    /* ── NAV ── */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      height: 72px;
+      background: rgba(13,27,42,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .nav-brand {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+    }
+    .nav-brand-sub {
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+    }
+    .nav-brand-name {
+      font-family: var(--serif);
+      font-size: 18px;
+      color: var(--gold);
+      font-weight: 400;
+      letter-spacing: 0.06em;
+    }
+    .nav-cta {
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 10px 20px;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .nav-cta:hover { color: var(--gold); border-color: var(--gold); }
+
+    /* ── HERO ── */
+    .hero {
+      height: 100dvh;
+      height: 100vh;
+      min-height: 560px;
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #0d1b2a 0%, #1a2f45 50%, #0d1b2a 100%);
+    }
+    /* Subtle pattern overlay */
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 20% 50%, rgba(201,169,110,0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(201,169,110,0.05) 0%, transparent 40%);
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to top, rgba(13,27,42,0.95) 0%, rgba(13,27,42,0.2) 60%);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 0 48px 80px;
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--gold);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      margin-bottom: 24px;
+    }
+    .hero-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: #fff;
+      border-radius: 50%;
+      display: inline-block;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(44px, 6vw, 82px);
+      font-weight: 400;
+      color: #fff;
+      line-height: 1.05;
+      margin-bottom: 16px;
+    }
+    .hero-title em {
+      color: var(--gold);
+      font-style: normal;
+    }
+    .hero-sub {
+      font-size: 15px;
+      color: rgba(255,255,255,0.45);
+      letter-spacing: 0.06em;
+      margin-bottom: 56px;
+      max-width: 480px;
+      line-height: 1.7;
+    }
+
+    /* ── CTA LINK (sehr präsent) ── */
+    .hero-cta-wrap {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .cta-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      background: var(--gold);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 18px 36px;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .cta-primary:hover {
+      background: #b8924f;
+      transform: translateY(-1px);
+    }
+    .cta-primary svg {
+      flex-shrink: 0;
+      transition: transform 0.2s;
+    }
+    .cta-primary:hover svg { transform: translateX(4px); }
+
+    .cta-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: rgba(255,255,255,0.55);
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .cta-secondary:hover {
+      color: var(--gold);
+      border-color: var(--gold);
+    }
+
+    /* ── KERNDATEN BAR ── */
+    .kerndaten {
+      background: rgba(0,0,0,0.4);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 0 48px;
+    }
+    .kerndaten-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-left: 1px solid rgba(255,255,255,0.07);
+    }
+    .kerndaten-item {
+      padding: 32px 24px;
+      border-right: 1px solid rgba(255,255,255,0.07);
+    }
+    .kerndaten-label {
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      display: block;
+      margin-bottom: 8px;
+    }
+    .kerndaten-value {
+      font-family: var(--serif);
+      font-size: 20px;
+      color: #fff;
+      line-height: 1.1;
+    }
+    .kerndaten-value--gold { color: var(--gold); }
+
+    /* ── COMING SOON SECTION ── */
+    .coming {
+      background: var(--light);
+      padding: 100px 48px;
+      text-align: center;
+    }
+    .coming-inner {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    .coming-label {
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 16px;
+    }
+    .coming-title {
+      font-family: var(--serif);
+      font-size: clamp(28px, 3.5vw, 46px);
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+    .coming-text {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--gray);
+      margin-bottom: 48px;
+    }
+
+    /* ── SCHILLERPLATZ TEASER (präsenter Link) ── */
+    .teaser {
+      background: var(--dark);
+      padding: 80px 48px;
+    }
+    .teaser-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .teaser-label {
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      margin-bottom: 16px;
+    }
+    .teaser-card {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 48px;
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 48px;
+      background: rgba(255,255,255,0.03);
+      transition: border-color 0.3s, background 0.3s;
+      text-decoration: none;
+    }
+    .teaser-card:hover {
+      border-color: var(--gold);
+      background: rgba(201,169,110,0.05);
+    }
+    .teaser-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--gold);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      margin-bottom: 20px;
+    }
+    .teaser-tag::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: #fff;
+      border-radius: 50%;
+      display: inline-block;
+      animation: pulse 2s infinite;
+    }
+    .teaser-title {
+      font-family: var(--serif);
+      font-size: clamp(26px, 3vw, 40px);
+      font-weight: 400;
+      color: #fff;
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+    .teaser-desc {
+      font-size: 14px;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.7;
+      max-width: 520px;
+    }
+    .teaser-arrow {
       display: flex;
       flex-direction: column;
       align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+    .teaser-arrow-circle {
+      width: 64px; height: 64px;
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
       justify-content: center;
-      text-align: center;
-      padding: 2rem;
+      color: var(--gold);
+      transition: background 0.2s;
     }
-
-    .container {
-      max-width: 680px;
+    .teaser-card:hover .teaser-arrow-circle {
+      background: var(--gold);
+      color: #fff;
     }
-
-    .logo {
-      font-size: 3.2rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      color: #c9a96e;
-      margin-bottom: 0.3rem;
+    .teaser-arrow-label {
+      font-size: 10px;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
     }
 
-    .logo span {
-      color: #f0ece4;
-    }
-
-    .tagline {
-      font-size: 0.85rem;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: #7a8fa6;
-      margin-bottom: 3rem;
-    }
-
-    .divider {
-      width: 60px;
-      height: 2px;
-      background: #c9a96e;
-      margin: 0 auto 3rem;
-    }
-
-    .headline {
-      font-size: 1.6rem;
-      font-weight: 400;
-      line-height: 1.6;
-      color: #f0ece4;
-      margin-bottom: 1.2rem;
-    }
-
-    .sub {
-      font-size: 1rem;
-      color: #7a8fa6;
-      line-height: 1.8;
-      font-family: 'Arial', sans-serif;
-    }
-
-    .contact {
-      margin-top: 3.5rem;
-      font-size: 0.85rem;
-      color: #7a8fa6;
-      font-family: 'Arial', sans-serif;
-      letter-spacing: 0.05em;
-    }
-
-    .contact a {
-      color: #c9a96e;
-      text-decoration: none;
-    }
-
-    .contact a:hover {
-      text-decoration: underline;
-    }
-
+    /* ── FOOTER ── */
     footer {
-      margin-top: 5rem;
-      font-size: 0.75rem;
-      color: #3a4a5a;
-      font-family: 'Arial', sans-serif;
+      background: rgba(0,0,0,0.5);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 32px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-brand {
+      font-family: var(--serif);
+      font-size: 16px;
+      color: var(--gold);
+      letter-spacing: 0.06em;
+    }
+    .footer-info {
+      font-size: 12px;
+      color: rgba(255,255,255,0.25);
+      letter-spacing: 0.04em;
+    }
+    .footer-info a {
+      color: rgba(255,255,255,0.4);
+      transition: color 0.2s;
+    }
+    .footer-info a:hover { color: var(--gold); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .nav { padding: 0 24px; }
+      .hero-content { padding: 0 24px 64px; }
+      .kerndaten { padding: 0 24px; }
+      .kerndaten-grid { grid-template-columns: 1fr 1fr; }
+      .kerndaten-item:last-child { grid-column: 1 / -1; }
+      .coming { padding: 72px 24px; }
+      .teaser { padding: 60px 24px; }
+      .teaser-card { grid-template-columns: 1fr; padding: 32px; }
+      .teaser-arrow { flex-direction: row; }
+      footer { padding: 24px; }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="logo">a<span>-</span>real</div>
-    <div class="tagline">Immobilien &middot; Österreich</div>
-    <div class="divider"></div>
-    <h1 class="headline">Hier entsteht bald etwas Großes.</h1>
-    <p class="sub">
-      Wir arbeiten mit Hochdruck an unserer neuen Website.<br />
-      Freuen Sie sich auf ein besonderes Immobilienerlebnis.
-    </p>
-    <div class="contact">
-      Fragen? &nbsp;<a href="mailto:office@a-real.at">office@a-real.at</a>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <a class="nav-brand" href="/">
+      <span class="nav-brand-sub">Immobilien</span>
+      <span class="nav-brand-name">a-real</span>
+    </a>
+    <a class="nav-cta" href="mailto:info@a-real.at">Kontakt</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-badge">In Kürze verfügbar</div>
+      <h1 class="hero-title">
+        Hier entsteht<br/>
+        <em>etwas Großes.</em>
+      </h1>
+      <p class="hero-sub">
+        a-real Immobilien – Ihr Partner für außergewöhnliche Immobilien in Österreich.
+        Unsere neue Website ist in Kürze online.
+      </p>
+      <div class="hero-cta-wrap">
+        <a class="cta-primary" href="mailto:info@a-real.at">
+          Jetzt Kontakt aufnehmen
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <a class="cta-secondary" href="#aktuell">
+          Aktuelles Angebot ansehen
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- KERNDATEN -->
+  <div class="kerndaten">
+    <div class="kerndaten-grid">
+      <div class="kerndaten-item">
+        <span class="kerndaten-label">Standort</span>
+        <span class="kerndaten-value">Wien · Österreich</span>
+      </div>
+      <div class="kerndaten-item">
+        <span class="kerndaten-label">Spezialisierung</span>
+        <span class="kerndaten-value">Wohn- &amp; Anlageliegenschaften</span>
+      </div>
+      <div class="kerndaten-item">
+        <span class="kerndaten-label">Kontakt</span>
+        <span class="kerndaten-value kerndaten-value--gold">info@a-real.at</span>
+      </div>
     </div>
   </div>
-  <footer>&copy; 2026 a-real Immobilien &mdash; Wien, Österreich</footer>
+
+  <!-- COMING SOON -->
+  <section class="coming">
+    <div class="coming-inner">
+      <p class="coming-label">Website · In Entwicklung</p>
+      <h2 class="coming-title">Unsere neue Plattform<br/>entsteht gerade.</h2>
+      <p class="coming-text">
+        Wir arbeiten intensiv an einem neuen digitalen Auftritt für a-real Immobilien.
+        In Kürze finden Sie hier ein umfassendes Portfolio erstklassiger Liegenschaften,
+        fundierte Marktanalysen und direkten Zugang zu unserem Expertenteam.
+      </p>
+    </div>
+  </section>
+
+  <!-- SCHILLERPLATZ TEASER (präsenter Link) -->
+  <section class="teaser" id="aktuell">
+    <div class="teaser-inner">
+      <p class="teaser-label">Aktuelles Angebot</p>
+      <a class="teaser-card" href="https://schillerplatz7.at" target="_blank" rel="noopener">
+        <div>
+          <div class="teaser-tag">Gerichtliche Versteigerung</div>
+          <h3 class="teaser-title">Schillerplatz 7<br/>Graz</h3>
+          <p class="teaser-desc">
+            Bestandsgebäude in erstklassiger Innenstadtlage · 545 m² Nutzfläche ·
+            Kerngebiet · Laufende Mietverträge · Jetzt alle Details ansehen.
+          </p>
+        </div>
+        <div class="teaser-arrow">
+          <div class="teaser-arrow-circle">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M4 10h12M12 5l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <span class="teaser-arrow-label">Zur Seite</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-brand">a-real Immobilien</span>
+    <span class="footer-info">
+      &copy; 2026 a-real Immobilien e.U. &nbsp;·&nbsp;
+      <a href="mailto:info@a-real.at">info@a-real.at</a>
+    </span>
+  </footer>
+
 </body>
 </html>
